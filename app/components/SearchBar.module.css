@@ -1,0 +1,47 @@
+.inputSearch {
+	height: 40px;
+	width: 40px;
+	border-style: none;
+	padding: 0.5em;
+	font-size: 18px;
+	letter-spacing: 2px;
+	outline: none;
+	border-radius: 25px;
+	transition: all 0.5s ease-in-out;
+	background-color: transparent;
+	padding-right: 40px;
+	color: white;
+}
+.inputSearch::placeholder {
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 18px;
+	letter-spacing: 2px;
+	font-weight: 100;
+}
+.btnSearch {
+	border-style: none;
+	font-size: 12px;
+	font-weight: bold;
+	outline: none;
+	cursor: pointer;
+	border-radius: 50%;
+	position: absolute;
+	right: 0px;
+	color: #ffffff;
+	background-color: transparent;
+	pointer-events: painted;
+}
+.btnSearch:focus ~ .inputSearch {
+	width: 400px;
+	border-radius: 0px;
+	background-color: transparent;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+	transition: all 500ms ease-out;
+}
+.inputSearch:focus {
+	width: 400px;
+	border-radius: 0px;
+	background-color: transparent;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+	transition: all 500ms ease-in;
+}

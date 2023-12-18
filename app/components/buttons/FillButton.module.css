@@ -1,0 +1,58 @@
+.p {
+	--p: #bb86fc;
+	color: var(--p);
+	font-size: 12px;
+	border: 0.3em solid var(--p);
+	border-radius: 5em;
+	width: fit-content;
+	height: fit-content;
+	padding: 0rem 1rem;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-family: sans-serif;
+	letter-spacing: 0.2em;
+	text-align: center;
+	line-height: 3em;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+	transition: 0.5s;
+	margin: 1em;
+}
+
+.p .pf {
+	position: absolute;
+	width: 25%;
+	height: 100%;
+	background-color: var(--p);
+	transform: translateY(150%);
+	border-radius: 50%;
+	left: calc((var(--n) - 1) * 25%);
+	transition: 0.5s;
+	transition-delay: calc((var(--n) - 1) * 0.1s);
+	z-index: -1;
+}
+
+.p:hover {
+	color: black;
+}
+
+.p:hover .pf {
+	transform: translateY(0) scale(2);
+}
+
+.p .pf:nth-child(1) {
+	--n: 1;
+}
+
+.p .pf:nth-child(2) {
+	--n: 2;
+}
+
+.p .pf:nth-child(3) {
+	--n: 3;
+}
+
+.p .pf:nth-child(4) {
+	--n: 4;
+}
