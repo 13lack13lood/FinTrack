@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import styles from "./SearchBar.module.css";
+import styles from "./NavSearchBar.module.css";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const SearchBar = () => {
+const NavSearchBar = () => {
 	const [inputQuery, setInputQuery] = useState("");
 	const router = useRouter();
 
@@ -35,4 +35,4 @@ const SearchBar = () => {
 	);
 };
 
-export default SearchBar;
+export default NavSearchBar;

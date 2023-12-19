@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import HamburgerMenuButton from "./buttons/HamburgerMenuButton";
 import Link from "next/link";
-import SearchBar from "./SearchBar";
+import SearchBar from "./NavSearchBar";
 import FillButton from "./buttons/FillButton";
 
 const Navigation = () => {
