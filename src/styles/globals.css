@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	padding-top: 4rem;
+	--bg-accent: #bb86fc;
+	--bg-accent-blue: #40c9ff;
+	--bg-color: #121212;
+	--bg-color-primary: #1d1d1d;
+	--bg-color-secondary: #2b2b2b;
+}

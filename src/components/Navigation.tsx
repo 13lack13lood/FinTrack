@@ -5,14 +5,15 @@ import HamburgerMenuButton from "./buttons/HamburgerMenuButton";
 import Link from "next/link";
 import SearchBar from "./NavSearchBar";
 import FillButton from "./buttons/FillButton";
+import SideMenu from "./SideMenu";
 
 const Navigation = () => {
 	const [toggle, setToggle] = useState(false);
 
 	return (
-		<nav className="bg-bgcolor-primary overflow-hidden fixed top-0 w-full h-16">
+		<nav className="bg-bgcolor-primary drop-shadow-bg-light fixed top-0 w-full h-16 z-[100]">
 			<div className="flex flex-col w-full h-full justify-center">
-				<div className="w-full flex flex-wrap items-center justify-between mx-auto p-4 px-8">
+				<div className="w-full flex flex-row items-center justify-between mx-auto p-4 px-8">
 					<div className="flex flex-wrap items-center justify-center space-x-6">
 						<HamburgerMenuButton toggle={toggle} setToggle={setToggle} />
 						<Link
@@ -31,6 +32,7 @@ const Navigation = () => {
 					</div>
 				</div>
 			</div>
+			<SideMenu toggle={toggle}></SideMenu>
 		</nav>
 	);
 };

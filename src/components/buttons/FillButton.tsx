@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./FillButton.module.css";
+import styles from "../../styles/FillButton.module.css";
 
 interface Props {
 	text: string;

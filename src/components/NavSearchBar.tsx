@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import styles from "./NavSearchBar.module.css";
+import styles from "../styles/NavSearchBar.module.css";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 

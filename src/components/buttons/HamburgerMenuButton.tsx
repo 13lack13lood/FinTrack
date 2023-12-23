@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./HamburgerMenuButton.module.css";
+import styles from "../../styles/HamburgerMenuButton.module.css";
 
 interface Props {
 	toggle: boolean;
