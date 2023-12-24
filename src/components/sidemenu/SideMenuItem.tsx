@@ -22,7 +22,7 @@ const SideMenuItem = ({ item }: Props) => {
 				<Image
 					className="transition ease-out drop-shadow-bg-light"
 					src={item.icon}
-					alt="search icon"
+					alt="icon"
 					width="40"
 					height="40"
 				></Image>

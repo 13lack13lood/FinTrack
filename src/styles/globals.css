@@ -9,4 +9,5 @@ body {
 	--bg-color: #121212;
 	--bg-color-primary: #1d1d1d;
 	--bg-color-secondary: #2b2b2b;
+	background-color: var(--bg-color);
 }

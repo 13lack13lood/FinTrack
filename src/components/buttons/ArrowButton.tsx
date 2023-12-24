@@ -15,12 +15,12 @@ const ArrowButton = ({ title, icon, link }: Props) => {
 
 	return (
 		<button
-			className="flex flex-row bg-none group items-center w-fit space-x-3 group"
+			className="flex flex-row bg-none group items-center w-fit space-x-3 group m-3"
 			onClick={() => {
 				router.push(link);
 			}}
 		>
-			<div className="text-white pb-2 text-lg pr-4">
+			<div className="text-white pb-2 text-lg pr-4 group-hover:transition group-hover:duration-300 group-hover:scale-110">
 				<div className="flex flex-row items-center justify-start space-x-3">
 					<Image src={icon} alt={`${icon.replace("/", "")} icon`} width="35" height="35"></Image>
 					<div className="text-white text-2xl">{title}</div>

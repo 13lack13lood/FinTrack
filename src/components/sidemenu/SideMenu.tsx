@@ -22,6 +22,13 @@ const SideMenu = ({ toggle }: Props) => {
 				></SideMenuItem>
 				<SideMenuItem
 					item={{
+						title: "News",
+						link: "/news",
+						icon: "./news.svg",
+					}}
+				></SideMenuItem>
+				<SideMenuItem
+					item={{
 						title: "Portfolio",
 						link: "/portfolio",
 						icon: "./portfolio.svg",
