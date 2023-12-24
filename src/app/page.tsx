@@ -1,5 +1,6 @@
 import RoundSearchBar from "../components/RoundSearchBar";
 import StockGrid from "../components/StockGrid";
+import { TrendingStockData } from "../types";
 
 const getTrendingData = async () => {
 	const res = await fetch("http://localhost:5000/popular_stocks", {
@@ -12,21 +13,9 @@ const getTrendingData = async () => {
 
 export default async function Home() {
 	const trendingData: {
-		gainers: {
-			change: string;
-			name: string;
-			ticker: string;
-		}[];
-		losers: {
-			change: string;
-			name: string;
-			ticker: string;
-		}[];
-		trending: {
-			change: string;
-			name: string;
-			ticker: string;
-		}[];
+		gainers: TrendingStockData[];
+		losers: TrendingStockData[];
+		trending: TrendingStockData[];
 	} = await getTrendingData();
 
 	return (
@@ -41,9 +30,26 @@ export default async function Home() {
 					</div>
 				</div>
 				<div className="flex flex-col w-full space-y-16 py-10">
-					<StockGrid title="Trending" stocks={trendingData.trending}></StockGrid>
-					<StockGrid title="Gainers" stocks={trendingData.gainers}></StockGrid>
-					<StockGrid title="Losers" stocks={trendingData.losers}></StockGrid>
+					<StockGrid
+						item={{ title: "Trending", icon: "./active.svg", link: "/explore/trending" }}
+						stocks={trendingData.trending}
+					></StockGrid>
+					<StockGrid
+						item={{
+							title: "Gainers",
+							icon: "./trendingUp.svg",
+							link: "/explore/gainers",
+						}}
+						stocks={trendingData.gainers}
+					></StockGrid>
+					<StockGrid
+						item={{
+							title: "Losers",
+							icon: "./trendingDown.svg",
+							link: "/explore/losers",
+						}}
+						stocks={trendingData.losers}
+					></StockGrid>
 				</div>
 			</div>
 		</main>

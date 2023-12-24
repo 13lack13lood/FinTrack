@@ -4,10 +4,10 @@ type TrendingStockData = {
 	ticker: string;
 };
 
-type SideMenuItem = {
-	heading: string;
+type MenuItem = {
+	title: string;
 	icon: string;
 	link: string;
 };
 
-export type { TrendingStockData, SideMenuItem };
+export type { TrendingStockData, MenuItem };

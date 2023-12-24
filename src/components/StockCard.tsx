@@ -31,7 +31,7 @@ const getStockText = (percentChange: string) => {
 
 const StockCard = ({ stock }: Props) => {
 	return (
-		<a className="z-10 group drop-shadow-bg block relative w-full h-full bg-bgcolor-primary rounded-2xl p-6 overflow-hidden border-2 border-bgcolor-primary hover:border-accent transition ease-in hover:cursor-pointer">
+		<a className="group drop-shadow-bg block relative w-full h-full bg-bgcolor-primary rounded-2xl p-6 overflow-hidden border-2 border-bgcolor-primary hover:border-accent transition ease-in hover:cursor-pointer">
 			<div className="flex flex-col h-full">
 				<div className="flex flex-row justify-between items-center mb-7">
 					<h3 className="text-white text-2xl">{stock.ticker}</h3>

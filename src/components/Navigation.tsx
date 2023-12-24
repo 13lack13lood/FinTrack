@@ -5,7 +5,7 @@ import HamburgerMenuButton from "./buttons/HamburgerMenuButton";
 import Link from "next/link";
 import SearchBar from "./NavSearchBar";
 import FillButton from "./buttons/FillButton";
-import SideMenu from "./SideMenu";
+import SideMenu from "./sidemenu/SideMenu";
 
 const Navigation = () => {
 	const [toggle, setToggle] = useState(false);

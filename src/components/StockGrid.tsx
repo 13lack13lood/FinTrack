@@ -1,16 +1,17 @@
 import React from "react";
 import StockCard from "./StockCard";
-import { TrendingStockData } from "../types";
+import { MenuItem, TrendingStockData } from "../types";
+import ArrowButton from "./buttons/ArrowButton";
 
 interface Props {
-	title: string;
+	item: MenuItem;
 	stocks: TrendingStockData[];
 }
 
-const StockGrid = ({ title, stocks }: Props) => {
+const StockGrid = ({ item, stocks }: Props) => {
 	return (
 		<div className="flex flex-col">
-			<div className="text-white text-2xl m-5">{title}</div>
+			<ArrowButton title={item.title} icon={item.icon} link={item.link}></ArrowButton>
 			<div className="grid grid-cols-5 gap-4">
 				{stocks.map((stock) => {
 					return <StockCard stock={stock}></StockCard>;
