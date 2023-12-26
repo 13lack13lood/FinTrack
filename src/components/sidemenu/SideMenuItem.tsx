@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { MenuItem } from "@/src/types";
+import { MenuItem } from "@/types/types";
 import { useRouter } from "next/navigation";
 
 interface Props {

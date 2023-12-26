@@ -1,5 +1,5 @@
 import React from "react";
-import { TrendingStockData } from "../types";
+import { TrendingStockData } from "../../types/types";
 
 interface Props {
 	stock: TrendingStockData;
@@ -9,11 +9,11 @@ const getStockColorPercent = (percentChange: string) => {
 	let percent = parseFloat(percentChange.replace("%", ""));
 
 	if (percent > 0) {
-		if (percent > 10) return " bg-gain-l";
+		if (percent > 10) return "bg-gain-l";
 
-		if (percent > 5) return " bg-gain-m";
+		if (percent > 5) return "bg-gain-m";
 
-		return " bg-gain-s";
+		return "bg-gain-s";
 	}
 
 	if (percent < -10) return "bg-loss-l";

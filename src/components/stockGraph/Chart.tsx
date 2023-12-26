@@ -1,26 +1,25 @@
 "use client";
 
 import React from "react";
-import { createChart, ColorType, CrosshairMode, PriceLineSource, LineStyle } from "lightweight-charts";
+import { createChart, ColorType, CrosshairMode, PriceLineSource, LineStyle, AutoscaleInfo } from "lightweight-charts";
 import { useRef, useEffect } from "react";
 
 interface Props {
 	data: { time: any; value: number }[];
-	colors?: { [key: string]: string };
+	colors: {
+		backgroundColor: string;
+		lineColor: string;
+		textColor: string;
+		areaTopColor: string;
+		areaBottomColor: string;
+		borderColor: string;
+		horiLineColor: string;
+		crosshairColor: string;
+		crosshairLabelBackgroundColor: string;
+	};
 }
 
-const Chart = (props: Props) => {
-	const {
-		data,
-		colors: {
-			backgroundColor = "#1d1d1d",
-			lineColor = "#BB86FC",
-			textColor = "white",
-			areaTopColor = "#BB86FC",
-			areaBottomColor = "#BB86FC00",
-		} = {},
-	} = props;
-
+const Chart = ({ data, colors }: Props) => {
 	const chartContainerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -34,9 +33,9 @@ const Chart = (props: Props) => {
 			layout: {
 				background: {
 					type: ColorType.Solid,
-					color: backgroundColor,
+					color: colors.backgroundColor,
 				},
-				textColor,
+				textColor: colors.textColor,
 			},
 			width: chartContainerRef.current.clientWidth,
 			height: 400,
@@ -44,7 +43,7 @@ const Chart = (props: Props) => {
 				minBarSpacing: 0.001,
 				fixLeftEdge: true,
 				fixRightEdge: true,
-				borderColor: "#1d1d1d",
+				borderColor: colors.borderColor,
 				timeVisible: true,
 				secondsVisible: false,
 			},
@@ -53,41 +52,51 @@ const Chart = (props: Props) => {
 			},
 			leftPriceScale: {
 				visible: true,
-				borderColor: "#1d1d1d",
+				borderColor: colors.borderColor,
 				autoScale: true,
+				scaleMargins: {
+					top: 0.1,
+					bottom: 0.05,
+				},
 			},
 			grid: {
 				vertLines: {
 					visible: false,
 				},
 				horzLines: {
-					color: "#FFFFFF88",
+					color: colors.horiLineColor,
 				},
 			},
 			crosshair: {
 				mode: CrosshairMode.Magnet,
 				vertLine: {
-					color: "white",
-					labelBackgroundColor: "#BB86FC",
+					color: colors.crosshairColor,
+					labelBackgroundColor: colors.crosshairLabelBackgroundColor,
 				},
 				horzLine: {
-					color: "white",
-					labelBackgroundColor: "#BB86FC",
+					color: colors.crosshairColor,
+					labelBackgroundColor: colors.crosshairLabelBackgroundColor,
 				},
 			},
 		});
 		chart.timeScale().fitContent();
 
 		const newSeries = chart.addAreaSeries({
-			lineColor,
-			topColor: areaTopColor,
-			bottomColor: areaBottomColor,
+			lineColor: colors.lineColor,
+			topColor: colors.areaTopColor,
+			bottomColor: colors.areaBottomColor,
 			priceLineVisible: true,
 			priceLineWidth: 2,
-			// priceLineColor: "#40c9ff",
 			priceLineStyle: LineStyle.LargeDashed,
 			priceLineSource: PriceLineSource.LastVisible,
 			lastValueVisible: false,
+			autoscaleInfoProvider: (original: () => AutoscaleInfo | null) => {
+				const res = original();
+				if (res !== null && res.priceRange.minValue < 0) {
+					res.priceRange.minValue = 0;
+				}
+				return res;
+			},
 		});
 		newSeries.setData(data);
 
@@ -98,7 +107,7 @@ const Chart = (props: Props) => {
 
 			chart.remove();
 		};
-	}, [data, backgroundColor, lineColor, textColor, areaTopColor, areaBottomColor]);
+	}, [data, colors.backgroundColor, colors.lineColor, colors.textColor, colors.areaTopColor, colors.areaBottomColor]);
 
 	return <div ref={chartContainerRef} />;
 };

@@ -1,6 +1,6 @@
 import RoundSearchBar from "../components/RoundSearchBar";
 import StockGrid from "../components/StockGrid";
-import { TrendingStockData } from "../types";
+import { TrendingStockData } from "../../types/types";
 
 const getTrendingData = async () => {
 	const res = await fetch("http://localhost:5000/popular_stocks", {
