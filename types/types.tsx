@@ -15,7 +15,7 @@ type StockData = {
 	info: {
 		Industry: string;
 		Sector: string;
-		"IPO Date": string;
+		Founded: string;
 		Employees: string;
 		"Stock Exchange": string;
 		"Ticker Symbol": string;
@@ -98,4 +98,13 @@ type HistoricalPriceDataRaw = { [key: string]: number };
 
 type HistoricalPriceDataProcessed = { time: number; value: number }[];
 
-export type { TrendingStockData, MenuItem, StockData, HistoricalPriceDataProcessed, HistoricalPriceDataRaw };
+type ExtraDataSelection = "news" | "balance" | "income" | "cashflow" | "more info";
+
+export type {
+	TrendingStockData,
+	MenuItem,
+	StockData,
+	HistoricalPriceDataProcessed,
+	HistoricalPriceDataRaw,
+	ExtraDataSelection,
+};

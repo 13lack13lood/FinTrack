@@ -102,7 +102,11 @@ const News = ({ news, news_mean }: Props) => {
 						FinBERT is a pre-trained natural language processing model to analyze sentiment of financial
 						text. The model determines a label of positive, negative, or neutral given the text along with a
 						percentage.
-						<a className="underline px-2" href="https://huggingface.co/ProsusAI/finbert" target="_blank">
+						<a
+							className="underline px-2 transition-all duration-150 hover:text-accent"
+							href="https://huggingface.co/ProsusAI/finbert"
+							target="_blank"
+						>
 							[More info on FinBERT]
 						</a>
 					</div>

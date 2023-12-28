@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { HistoricalPriceDataProcessed, HistoricalPriceDataRaw, StockData } from "@/types/types";
 import Loading from "./loading";
 import TickerInfo from "@/src/components/stock/TickerInfo";
-import News from "@/src/components/stock/extraData/News";
+import ExtraData from "@/src/components/stock/extraData/ExtraData";
 
 interface Props {
 	params: {
@@ -15,9 +15,9 @@ interface Props {
 	};
 }
 
-const getStockData = async () => {
-	const res = await fetch("http://localhost:5000/test", {
-		cache: "force-cache",
+const getStockData = async (ticker: string) => {
+	const res = await fetch("http://localhost:5000/stock/" + ticker, {
+		cache: "no-store",
 	});
 
 	const data: StockData = await res.json();
@@ -112,11 +112,10 @@ const page = ({ params }: Props) => {
 	const [history, setHistory] = useState<HistoricalPriceDataProcessed>();
 	const [historyLoaded, setHistoryLoaded] = useState(false);
 	const [currentPrice, setCurrentPrice] = useState(-1);
-	const [buttonSelected, setButtonSelected] = useState<"news" | "">("news");
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const data: StockData = await getStockData();
+			const data: StockData = await getStockData(params.ticker);
 
 			setStockData(data);
 			setHistory(processHistoryData(data.history.Open));
@@ -212,11 +211,9 @@ const page = ({ params }: Props) => {
 							<TickerInfo stock_info={stockData.stock_info} />
 						</div>
 					</div>
-					<div className="flex flex-col w-full px-4">
-						<div className="flex flex-row justify-center items-center text-white bg-accent rounded-full w-fit mx-auto px-6 py-2">
-							News
-						</div>
-						<News news={stockData.news} news_mean={stockData.news_mean} />
+
+					<div className="w-full px-4">
+						<ExtraData stockData={stockData} />
 					</div>
 				</div>
 			)}
