@@ -6,22 +6,6 @@ interface Props {
 	setData: (data: any) => void;
 }
 
-const handleDataFetch = async (onClickPeriod: string, setData: (data: any) => void) => {
-	const res = await fetch("http://localhost:5000/history", {
-		method: "GET",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			period: onClickPeriod,
-		}),
-	});
-
-	const data = await res.json();
-
-	setData(data);
-};
-
 const ChartPeriodButton = ({ text, onClickPeriod, setData }: Props) => {
 	return (
 		<div

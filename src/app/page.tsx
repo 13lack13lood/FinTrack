@@ -1,4 +1,4 @@
-import RoundSearchBar from "../components/RoundSearchBar";
+import RoundSearchBar from "../components/searchBars/RoundSearchBar";
 import StockGrid from "../components/StockGrid";
 import { TrendingStockData } from "../../types/types";
 

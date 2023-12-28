@@ -16,7 +16,7 @@ const RoundSearchBar = () => {
 		<div className="flex flex-row items-center w-full justify-center space-x-3">
 			<input
 				type="text"
-				className="w-[80%] text-xl text-black drop-shadow-bg font-light p-3 m-4 rounded-full outline-none capitalize indent-4 placeholder:font-extralight"
+				className="w-[80%] text-xl text-black drop-shadow-bg font-light p-3 m-4 rounded-full outline-none indent-4 placeholder:font-extralight uppercase"
 				placeholder="AAPL"
 				onChange={(event) => setInputQuery(event.currentTarget.value)}
 				onKeyDown={(event) => {
@@ -34,6 +34,10 @@ const RoundSearchBar = () => {
 				width="50"
 				height="50"
 				color="black"
+				onClick={() => {
+					searchHandler();
+					setInputQuery("");
+				}}
 			></Image>
 		</div>
 	);

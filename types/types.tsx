@@ -30,7 +30,7 @@ type StockData = {
 		"Market Cap": string;
 		"Revenue (ttm)": string;
 		"Net Income (ttm)": string;
-		"Shares Out  ": string;
+		"Shares Out": string;
 		"EPS (ttm)": string;
 		"PE Ratio": string;
 		"Forward PE": string;
@@ -69,22 +69,22 @@ type StockData = {
 	};
 	news: {
 		compound: {
-			[key: string]: number;
+			[key: number]: number;
 		};
 		date: {
-			[key: string]: string;
+			[key: number]: string;
 		};
 		time: {
-			[key: string]: string;
+			[key: number]: string;
 		};
 		headline: {
-			[key: string]: string;
+			[key: number]: string;
 		};
 		link: {
-			[key: string]: string;
+			[key: number]: string;
 		};
 		publisher: {
-			[key: string]: string;
+			[key: number]: string;
 		};
 	};
 	news_mean: {
