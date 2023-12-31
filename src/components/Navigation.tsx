@@ -19,6 +19,9 @@ const Navigation = () => {
 						<Link
 							href="/"
 							className="text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-accent-blue to-accent"
+							onClick={() => {
+								setToggle(false);
+							}}
 						>
 							FinTrack
 						</Link>
@@ -32,7 +35,7 @@ const Navigation = () => {
 					</div>
 				</div>
 			</div>
-			<SideMenu toggle={toggle}></SideMenu>
+			<SideMenu toggle={toggle} setToggle={setToggle}></SideMenu>
 		</nav>
 	);
 };

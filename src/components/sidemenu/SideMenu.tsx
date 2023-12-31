@@ -3,9 +3,10 @@ import SideMenuItem from "./SideMenuItem";
 
 interface Props {
 	toggle: boolean;
+	setToggle: (toggle: boolean) => void;
 }
 
-const SideMenu = ({ toggle }: Props) => {
+const SideMenu = ({ toggle, setToggle }: Props) => {
 	return (
 		<div
 			className={`overflow-hidden h-screen bg-bgcolor-primary transition-all ease-in-out duration-300 ${
@@ -19,6 +20,7 @@ const SideMenu = ({ toggle }: Props) => {
 						link: "/explore",
 						icon: "./explore.svg",
 					}}
+					setToggle={setToggle}
 				></SideMenuItem>
 				<SideMenuItem
 					item={{
@@ -26,6 +28,7 @@ const SideMenu = ({ toggle }: Props) => {
 						link: "/news",
 						icon: "./news.svg",
 					}}
+					setToggle={setToggle}
 				></SideMenuItem>
 				<SideMenuItem
 					item={{
@@ -33,6 +36,7 @@ const SideMenu = ({ toggle }: Props) => {
 						link: "/portfolio",
 						icon: "./portfolio.svg",
 					}}
+					setToggle={setToggle}
 				></SideMenuItem>
 				<SideMenuItem
 					item={{
@@ -40,6 +44,7 @@ const SideMenu = ({ toggle }: Props) => {
 						link: "/watchlist",
 						icon: "./watchlist.svg",
 					}}
+					setToggle={setToggle}
 				></SideMenuItem>
 			</div>
 		</div>

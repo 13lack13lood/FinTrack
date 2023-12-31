@@ -44,9 +44,9 @@ const News = ({ news, news_mean }: Props) => {
 	return (
 		<div className="grid grid-cols-3 gap-4">
 			<div className="grid grid-cols-2 gap-4 col-span-2">
-				{processNewsData(news).map((value) => {
+				{processNewsData(news).map((value, index) => {
 					return (
-						<a href={value.link} target="_blank">
+						<a key={`${value.headline}_${index}`} href={value.link} target="_blank">
 							<div className="flex flex-col bg-bgcolor-primary rounded-2xl px-5 py-4 drop-shadow-bg space-y-3 h-full">
 								<div className="flex flex-row justify-start items-center space-x-4 font-thin text-white text-sm">
 									<div className="">{value.date}</div>
@@ -72,13 +72,16 @@ const News = ({ news, news_mean }: Props) => {
 				<div className="flex flex-col w-full items-center space-y-4">
 					{Object.entries(news_mean.compound)
 						.reverse()
-						.map(([date, value]) => {
+						.map(([date, value], index) => {
 							const compound = value;
 							const positive = compound > 0;
 							const negative = compound < 0;
 
 							return (
-								<div className="flex flex-row items-center text-white justify-between w-full bg-bgcolor-secondary rounded-full px-5 py-3 drop-shadow-bg-light ">
+								<div
+									key={`${value}_${index}`}
+									className="flex flex-row items-center text-white justify-between w-full bg-bgcolor-secondary rounded-full px-5 py-3 drop-shadow-bg-light "
+								>
 									<div className="text-lg">{date}</div>
 									<div
 										className={`rounded-full drop-shadow-bg-light text-sm font-light px-4 py-1 ${

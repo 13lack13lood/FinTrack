@@ -100,6 +100,54 @@ type HistoricalPriceDataProcessed = { time: number; value: number }[];
 
 type ExtraDataSelection = "news" | "balance" | "income" | "cashflow" | "more info";
 
+type GeneralNewsDataRaw = {
+	link: { [index: string]: string };
+	img_src: { [index: string]: string };
+	timestamp: { [index: string]: string };
+	publisher: { [index: string]: string };
+	headline: { [index: string]: string };
+	description: { [index: string]: string };
+	tickers: { [index: string]: string[] };
+	compound: { [index: string]: number };
+};
+
+type GeneralNewsDataProcessed = {
+	link: string;
+	img_src: string;
+	timestamp: string;
+	publisher: string;
+	headline: string;
+	description: string;
+	tickers: string[];
+	compound: number;
+}[];
+
+type IndexTickers = "^GSPC" | "^DJI" | "^IXIC";
+
+type IndexData = {
+	name: string;
+	ticker: IndexTickers;
+	history: {
+		Open: HistoricalPriceDataRaw;
+	};
+	wiki: {
+		url: string;
+		text: string;
+	};
+};
+
+type ExploreSelection = "market index" | "trending" | "gainers" | "losers";
+
+type TrendingStockDataFull = {
+	index: string;
+	change: string;
+	name: string;
+	ticker: string;
+	stock_price: string;
+	volume: string;
+	market_cap: string;
+};
+
 export type {
 	TrendingStockData,
 	MenuItem,
@@ -107,4 +155,10 @@ export type {
 	HistoricalPriceDataProcessed,
 	HistoricalPriceDataRaw,
 	ExtraDataSelection,
+	GeneralNewsDataProcessed,
+	GeneralNewsDataRaw,
+	IndexData,
+	IndexTickers,
+	ExploreSelection,
+	TrendingStockDataFull,
 };

@@ -15,10 +15,6 @@ const buttons = [
 		click: "5d",
 	},
 	{
-		text: "1D",
-		click: "1mo",
-	},
-	{
 		text: "3M",
 		click: "3mo",
 	},
@@ -48,10 +44,16 @@ const ChartPeriodButtonArray = ({ setPeriod }: Props) => {
 	return (
 		<div className="flex flex-wrap text-white text-xl px-2 mb-8 h-8">
 			<p>|</p>
-			{buttons.map(({ text, click }) => {
+			{buttons.map(({ text, click }, index) => {
 				return (
-					<div className="flex flex-row">
-						<ChartPeriodButton text={text} onClickPeriod={click} setData={setPeriod}></ChartPeriodButton>|
+					<div key={`div ${text}_${index}`} className="flex flex-row">
+						<ChartPeriodButton
+							key={`${text}_${index}`}
+							text={text}
+							onClickPeriod={click}
+							setData={setPeriod}
+						></ChartPeriodButton>
+						|
 					</div>
 				);
 			})}

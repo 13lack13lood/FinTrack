@@ -5,7 +5,6 @@ import Chart from "@/src/components/stock/Chart";
 import ChartPeriodButtonArray from "@/src/components/stock/ChartPeriodButtonArray";
 import { useState, useEffect } from "react";
 import { HistoricalPriceDataProcessed, HistoricalPriceDataRaw, StockData } from "@/types/types";
-import Loading from "./loading";
 import TickerInfo from "@/src/components/stock/TickerInfo";
 import ExtraData from "@/src/components/stock/extraData/ExtraData";
 
@@ -61,8 +60,14 @@ const processHistoryData = (historyData: HistoricalPriceDataRaw) => {
 };
 
 const getPriceChange = (initPrice: number, currentPrice: number, period: string) => {
-	const percent = (((currentPrice - initPrice) / initPrice) * 100).toFixed(2);
-	const difference = (currentPrice - initPrice).toFixed(2);
+	const percent = (((currentPrice - initPrice) / initPrice) * 100).toLocaleString(undefined, {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 2,
+	});
+	const difference = (currentPrice - initPrice).toLocaleString(undefined, {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 2,
+	});
 
 	if (currentPrice - initPrice > 0) {
 		switch (period) {
@@ -121,7 +126,6 @@ const page = ({ params }: Props) => {
 			setHistory(processHistoryData(data.history.Open));
 			setHistoryLoaded(true);
 			setStockDataLoaded(true);
-			console.log(data.news);
 		};
 
 		fetchData();
@@ -129,7 +133,6 @@ const page = ({ params }: Props) => {
 
 	useEffect(() => {
 		if (stockDataLoaded && history) {
-			console.log(history);
 			setCurrentPrice(history[history.length - 1].value);
 		}
 	}, [stockDataLoaded]);
@@ -144,6 +147,7 @@ const page = ({ params }: Props) => {
 				},
 				body: JSON.stringify({
 					period: period,
+					ticker: params.ticker,
 				}),
 			});
 
@@ -171,7 +175,13 @@ const page = ({ params }: Props) => {
 									</div>
 								</div>
 								<div className="flex flex-col items-end px-6">
-									<div className="text-4xl text-white font-light">${currentPrice}</div>
+									<div className="text-4xl text-white font-light tracking-wider">
+										$
+										{currentPrice.toLocaleString(undefined, {
+											minimumFractionDigits: 2,
+											maximumFractionDigits: 2,
+										})}
+									</div>
 									{historyLoaded && history && (
 										<div
 											className={`${

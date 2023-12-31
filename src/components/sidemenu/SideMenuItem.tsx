@@ -5,15 +5,17 @@ import { useRouter } from "next/navigation";
 
 interface Props {
 	item: MenuItem;
+	setToggle: (toggle: boolean) => void;
 }
 
-const SideMenuItem = ({ item }: Props) => {
+const SideMenuItem = ({ item, setToggle }: Props) => {
 	const router = useRouter();
 
 	return (
 		<div
 			className="flex flex-row w-full items-center justify-start py-8 px-5 cursor-pointer space-x-5 group h-12"
 			onClick={() => {
+				setToggle(false);
 				router.push(item.link);
 			}}
 		>
