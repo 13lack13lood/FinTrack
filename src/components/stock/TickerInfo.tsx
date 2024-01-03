@@ -1,6 +1,6 @@
 import { StockData } from "@/types/types";
 import React from "react";
-import { getTodayFull } from "@/util/Dates";
+import { getTodayFull } from "@/util/getDate";
 
 interface Props {
 	stock_info: StockData["stock_info"];

@@ -4,111 +4,17 @@ import React from "react";
 import Chart from "@/src/components/stock/Chart";
 import ChartPeriodButtonArray from "@/src/components/stock/ChartPeriodButtonArray";
 import { useState, useEffect } from "react";
-import { HistoricalPriceDataProcessed, HistoricalPriceDataRaw, StockData } from "@/types/types";
+import { HistoricalPriceDataProcessed, StockData } from "@/types/types";
 import TickerInfo from "@/src/components/stock/TickerInfo";
 import ExtraData from "@/src/components/stock/extraData/ExtraData";
+import { fetchHistoryData, fetchStockData } from "@/util/backendFetchData";
+import { processHistoryData, getPriceChange } from "@/util/ProcessStockData";
 
 interface Props {
 	params: {
 		ticker: string;
 	};
 }
-
-const getStockData = async (ticker: string) => {
-	const res = await fetch("http://localhost:5000/stock/" + ticker, {
-		cache: "no-store",
-	});
-
-	const data: StockData = await res.json();
-
-	return data;
-};
-
-const processHistoryData = (historyData: HistoricalPriceDataRaw) => {
-	let data: { time: number; value: number }[] = [];
-
-	Object.entries(historyData).forEach(([timestamp, value]) => {
-		data.push({
-			time: parseInt(timestamp),
-			value: value,
-		});
-	});
-
-	data.sort((x, y) => {
-		if (x.time > y.time) return 1;
-
-		if (x.time < y.time) return -1;
-		return 0;
-	});
-
-	return data.map(({ time, value }) => {
-		const d = new Date(time);
-		return {
-			time:
-				Date.UTC(
-					d.getFullYear(),
-					d.getMonth(),
-					d.getDate(),
-					d.getHours(),
-					d.getMinutes(),
-					d.getSeconds(),
-					d.getMilliseconds()
-				) / 1000,
-			value: value,
-		};
-	});
-};
-
-const getPriceChange = (initPrice: number, currentPrice: number, period: string) => {
-	const percent = (((currentPrice - initPrice) / initPrice) * 100).toLocaleString(undefined, {
-		minimumFractionDigits: 2,
-		maximumFractionDigits: 2,
-	});
-	const difference = (currentPrice - initPrice).toLocaleString(undefined, {
-		minimumFractionDigits: 2,
-		maximumFractionDigits: 2,
-	});
-
-	if (currentPrice - initPrice > 0) {
-		switch (period) {
-			case "5d":
-				return `+${difference} (+${percent}%) past week`;
-			case "1mo":
-				return `+${difference} (+${percent}%) past month`;
-			case "6mo":
-				return `+${difference} (+${percent}%) past 6 months`;
-			case "ytd":
-				return `+${difference} (+${percent}%) year to date`;
-			case "1y":
-				return `+${difference} (+${percent}%) past year`;
-			case "5y":
-				return `+${difference} (+${percent}%) past 5 years`;
-			case "max":
-				return `+${difference} (+${percent}%) all time`;
-			default:
-				return `+${difference} (+${percent}%) today`;
-		}
-	}
-
-	switch (period) {
-		case "5d":
-			return `${difference} (${percent}%) past week`;
-		case "1mo":
-			return `${difference} (${percent}%) past month`;
-		case "6mo":
-			return `${difference} (${percent}%) past 6 months`;
-		case "ytd":
-			return `${difference} (${percent}%) year to day`;
-		case "1y":
-			return `${difference} (${percent}%) past year`;
-		case "5y":
-			return `${difference} (${percent}%) past 5 years`;
-		case "max":
-			return `${difference} (${percent}%) all time`;
-		default:
-			return `${difference} (${percent}%) today`;
-	}
-};
 
 const page = ({ params }: Props) => {
 	const [stockData, setStockData] = useState<StockData>();
@@ -120,7 +26,7 @@ const page = ({ params }: Props) => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const data: StockData = await getStockData(params.ticker);
+			const data: StockData = await fetchStockData(params.ticker);
 
 			setStockData(data);
 			setHistory(processHistoryData(data.history.Open));
@@ -140,18 +46,7 @@ const page = ({ params }: Props) => {
 	useEffect(() => {
 		setHistoryLoaded(false);
 		const fetchData = async () => {
-			const res = await fetch("http://localhost:5000/history", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					period: period,
-					ticker: params.ticker,
-				}),
-			});
-
-			const data: { Open: HistoricalPriceDataRaw } = await res.json();
+			const data = await fetchHistoryData(period, params.ticker);
 
 			setHistory(processHistoryData(data.Open));
 			setHistoryLoaded(true);

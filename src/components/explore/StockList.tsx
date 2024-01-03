@@ -1,25 +1,12 @@
-import { ExploreSelection, TrendingStockDataFull } from "@/types/types";
+import { TrendingStockDataFull } from "@/types/types";
 import Link from "next/link";
 import React from "react";
 
 interface Props {
-	stocks: ExploreSelection;
+	data: TrendingStockDataFull[];
 }
 
-const getData = async (stocks: ExploreSelection) => {
-	const res = await fetch("http://localhost:5000/popular_stocks/" + stocks);
-	const data: {
-		data: TrendingStockDataFull[];
-	} = await res.json();
-
-	return data.data.sort((a, b) => {
-		return parseInt(a.index) > parseInt(b.index) ? 1 : -1;
-	});
-};
-
-const StockList = async ({ stocks }: Props) => {
-	const data = await getData(stocks);
-
+const StockList = ({ data }: Props) => {
 	return (
 		<div className="flex flex-col items-center justify-center w-max mx-auto p-4 space-y-4">
 			<div className="grid grid-cols-8 gap-4 items-center w-full text-white text-lg py-4 font-medium ">
