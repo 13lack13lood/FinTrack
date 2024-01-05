@@ -1,5 +1,5 @@
 import React from "react";
-import { TrendingStockData } from "../../types/types";
+import { TrendingStockData } from "../../../types/types";
 import Link from "next/link";
 
 interface Props {

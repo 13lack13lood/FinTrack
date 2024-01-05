@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import HamburgerMenuButton from "./buttons/HamburgerMenuButton";
+import HamburgerMenuButton from "../buttons/HamburgerMenuButton";
 import Link from "next/link";
-import SearchBar from "./searchBars/NavSearchBar";
-import FillButton from "./buttons/FillButton";
-import SideMenu from "./sidemenu/SideMenu";
+import SearchBar from "../searchBars/NavSearchBar";
+import SideMenu from "../sidemenu/SideMenu";
+import Authentication from "./Authentication";
 
 const Navigation = () => {
 	const [toggle, setToggle] = useState(false);
@@ -30,8 +30,7 @@ const Navigation = () => {
 						<div className="px-6">
 							<SearchBar></SearchBar>
 						</div>
-						<FillButton text="Sign Up" onClick={() => console.log("sign up")}></FillButton>
-						<FillButton text="Log In" onClick={() => console.log("sign up")}></FillButton>
+						<Authentication />
 					</div>
 				</div>
 			</div>

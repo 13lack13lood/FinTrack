@@ -8,13 +8,13 @@ interface Props {
 
 const FillButton = ({ text, onClick }: Props) => {
 	return (
-		<div className={styles.p} onClick={() => onClick()}>
+		<button type="submit" className={styles.p} onClick={() => onClick()}>
 			{text}
 			<span className={styles.pf}></span>
 			<span className={styles.pf}></span>
 			<span className={styles.pf}></span>
 			<span className={styles.pf}></span>
-		</div>
+		</button>
 	);
 };
 

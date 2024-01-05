@@ -1,5 +1,5 @@
 import RoundSearchBar from "../components/searchBars/RoundSearchBar";
-import StockGrid from "../components/StockGrid";
+import StockGrid from "../components/landingPage/StockGrid";
 import { TrendingStockData } from "../../types/types";
 
 const getTrendingData = async () => {

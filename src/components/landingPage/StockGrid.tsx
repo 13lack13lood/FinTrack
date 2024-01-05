@@ -1,7 +1,7 @@
 import React from "react";
 import StockCard from "./StockCard";
-import { MenuItem, TrendingStockData } from "../../types/types";
-import ArrowButton from "./buttons/ArrowButton";
+import { MenuItem, TrendingStockData } from "../../../types/types";
+import ArrowButton from "../buttons/ArrowButton";
 
 interface Props {
 	item: MenuItem;
