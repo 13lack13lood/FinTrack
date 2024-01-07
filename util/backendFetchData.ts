@@ -8,7 +8,7 @@ import {
 	TrendingStockData,
 } from "@/types/types";
 
-const backend = "http://localhost:5000/";
+const backend = process.env.NEXT_PUBLIC_BACKEND;
 
 const fetchTrendingData = async () => {
 	const res = await fetch(backend + "popular_stocks", {
