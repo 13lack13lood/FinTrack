@@ -7,6 +7,7 @@ import Chart from "@/src/components/stock/Chart";
 import { useState, useEffect } from "react";
 import { fetchHistoryData, fetchIndexData } from "@/util/backendFetchData";
 import { processHistoryData, getPriceChange } from "@/util/ProcessStockData";
+import IndexPageLoading from "./IndexPageLoading";
 
 const IndexPage = () => {
 	const [currentIndex, setCurrentIndex] = useState<IndexTickers>("^GSPC");
@@ -78,7 +79,7 @@ const IndexPage = () => {
 					NASDAQ Composite
 				</div>
 			</div>
-			{indexDataLoaded && indexData && (
+			{indexDataLoaded && indexData ? (
 				<div className="flex flex-col items-center px-4 space-y-4">
 					<div className="flex flex-col w-[55%] h-fit bg-bgcolor-primary space-y-6 py-6 rounded-xl drop-shadow-bg-light">
 						<div className="flex flex-row items-center justify-between w-full">
@@ -143,6 +144,10 @@ const IndexPage = () => {
 							</a>
 						</div>
 					</div>
+				</div>
+			) : (
+				<div className="flex flex-col w-full justify-center items-center">
+					<IndexPageLoading />
 				</div>
 			)}
 			;

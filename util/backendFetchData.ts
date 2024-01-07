@@ -5,9 +5,24 @@ import {
 	StockData,
 	HistoricalPriceDataRaw,
 	QuickStockData,
+	TrendingStockData,
 } from "@/types/types";
 
 const backend = "http://localhost:5000/";
+
+const fetchTrendingData = async () => {
+	const res = await fetch(backend + "popular_stocks", {
+		cache: "no-store",
+	});
+
+	const data: {
+		gainers: TrendingStockData[];
+		losers: TrendingStockData[];
+		trending: TrendingStockData[];
+	} = await res.json();
+
+	return data;
+};
 
 const fetchExploreData = async (stocks: ExploreSelection) => {
 	const res = await fetch(backend + "popular_stocks/" + stocks);
@@ -76,4 +91,12 @@ const fetchQuickStockData = async (ticker: string) => {
 	return data;
 };
 
-export { fetchExploreData, fetchNewsData, fetchStockData, fetchIndexData, fetchHistoryData, fetchQuickStockData };
+export {
+	fetchExploreData,
+	fetchNewsData,
+	fetchStockData,
+	fetchIndexData,
+	fetchHistoryData,
+	fetchQuickStockData,
+	fetchTrendingData,
+};

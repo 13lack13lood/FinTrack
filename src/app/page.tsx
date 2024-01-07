@@ -1,22 +1,9 @@
 import RoundSearchBar from "../components/searchBars/RoundSearchBar";
 import StockGrid from "../components/landingPage/StockGrid";
-import { TrendingStockData } from "../../types/types";
-
-const getTrendingData = async () => {
-	const res = await fetch("http://localhost:5000/popular_stocks", {
-		cache: "no-store",
-	});
-	const data = await res.json();
-
-	return data;
-};
+import { fetchTrendingData } from "@/util/backendFetchData";
 
 export default async function Home() {
-	const trendingData: {
-		gainers: TrendingStockData[];
-		losers: TrendingStockData[];
-		trending: TrendingStockData[];
-	} = await getTrendingData();
+	const trendingData = await fetchTrendingData();
 
 	return (
 		<main className="flex flex-col items-center justify-center min-h-screen">

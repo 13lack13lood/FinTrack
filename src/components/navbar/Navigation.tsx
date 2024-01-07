@@ -26,7 +26,12 @@ const Navigation = () => {
 							FinTrack
 						</Link>
 					</div>
-					<div className="flex flex-wrap items-center justify-center space-x-6 px-6">
+					<div
+						className="flex flex-wrap items-center justify-center space-x-6 px-6"
+						onClick={() => {
+							setToggle(false);
+						}}
+					>
 						<div className="px-6">
 							<SearchBar></SearchBar>
 						</div>

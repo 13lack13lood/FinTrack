@@ -18,7 +18,7 @@ const Loading = () => {
 					{"loading"}
 				</div>
 				<div className="bg-bgcolor-primary rounded-2xl py-4 text-center drop-shadow-bg px-6 col-span-2">
-					{"loading"}
+					{"loading"}z
 				</div>
 			</div>
 			<div className="grid grid-cols-7 gap-4 w-max items-center bg-bgcolor-primary text-bgcolor-primary drop-shadow-bg-light rounded-2xl py-4 transition-all duration-200 group-hover:-translate-x-5 group-hover:bg-accent tracking-wide">

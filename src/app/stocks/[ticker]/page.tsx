@@ -53,6 +53,7 @@ const page = ({ params }: Props) => {
 	const [currentPrice, setCurrentPrice] = useState(-1);
 	const [isAddedToWatchlist, setIsAddedToWatchlist] = useState(false);
 	const [loggedIn, setLoggedIn] = useState(false);
+	const [stockFound, setStockFound] = useState(true);
 
 	const router = useRouter();
 
@@ -87,6 +88,11 @@ const page = ({ params }: Props) => {
 		const fetchData = async () => {
 			const data: StockData = await fetchStockData(params.ticker);
 
+			if (!data.history || !data.stock_info) {
+				setStockFound(false);
+				return;
+			}
+
 			setStockData(data);
 			setHistory(processHistoryData(data.history.Open));
 			setHistoryLoaded(true);
@@ -112,6 +118,14 @@ const page = ({ params }: Props) => {
 		};
 		fetchData();
 	}, [period, setPeriod]);
+
+	if (!stockFound) {
+		return (
+			<div className="flex flex-col justify-center items-center h-[40vw] text-white text-4xl font-medium tracking-wider text-center">
+				Stock Not Found
+			</div>
+		);
+	}
 
 	return (
 		<>

@@ -14,7 +14,7 @@ const StockGrid = ({ item, stocks }: Props) => {
 			<ArrowButton title={item.title} icon={item.icon} link={item.link}></ArrowButton>
 			<div className="grid grid-cols-5 gap-4">
 				{stocks.map((stock) => {
-					return <StockCard stock={stock}></StockCard>;
+					return <StockCard stock={stock} key={stock.ticker}></StockCard>;
 				})}
 			</div>
 		</div>

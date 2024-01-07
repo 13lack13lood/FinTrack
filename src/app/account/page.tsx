@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import * as yup from "yup";
 import { auth } from "@/util/firebase/firebase";
 import { updateEmail, updatePassword, updateProfile } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 const validationSchemaName = yup.object({
 	name: yup.string().required("Name is required"),
@@ -21,7 +22,14 @@ const page = () => {
 	const [fail, setFail] = useState(false);
 	const [success, setSuccess] = useState(false);
 
+	const router = useRouter();
+
 	const user = auth.currentUser;
+
+	if (!user) {
+		router.push("/login");
+		return <div></div>;
+	}
 
 	return (
 		user && (
