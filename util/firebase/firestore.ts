@@ -15,7 +15,7 @@ const createWatchlist = (uid: string) => {
 const addToWatchlist = (ticker: string) => {
 	if (auth.currentUser) {
 		updateDoc(getWatchlistRef(auth.currentUser.uid), {
-			watchlist: arrayUnion(ticker),
+			watchlist: arrayUnion(ticker.toUpperCase()),
 		});
 	}
 };
@@ -23,7 +23,7 @@ const addToWatchlist = (ticker: string) => {
 const removeFromWatchlist = (ticker: string) => {
 	if (auth.currentUser) {
 		updateDoc(getWatchlistRef(auth.currentUser.uid), {
-			watchlist: arrayRemove(ticker),
+			watchlist: arrayRemove(ticker.toUpperCase()),
 		});
 	}
 };

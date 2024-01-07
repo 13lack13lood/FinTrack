@@ -36,17 +36,17 @@ const SideMenu = ({ toggle, setToggle }: Props) => {
 				></SideMenuItem>
 				<SideMenuItem
 					item={{
-						title: "Portfolio",
-						link: "/portfolio",
-						icon: portfolio,
+						title: "Watchlist",
+						link: "/watchlist",
+						icon: watchlist,
 					}}
 					setToggle={setToggle}
 				></SideMenuItem>
 				<SideMenuItem
 					item={{
-						title: "Watchlist",
-						link: "/watchlist",
-						icon: watchlist,
+						title: "Portfolio",
+						link: "/portfolio",
+						icon: portfolio,
 					}}
 					setToggle={setToggle}
 				></SideMenuItem>
