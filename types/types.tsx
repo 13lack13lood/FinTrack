@@ -148,6 +148,14 @@ type TrendingStockDataFull = {
 	market_cap: string;
 };
 
+type QuickStockData = {
+	Open: number;
+	High: number;
+	Low: number;
+	Close: number;
+	Volume: number;
+};
+
 export type {
 	TrendingStockData,
 	MenuItem,
@@ -161,4 +169,5 @@ export type {
 	IndexTickers,
 	ExploreSelection,
 	TrendingStockDataFull,
+	QuickStockData,
 };

@@ -28,6 +28,7 @@ const page = () => {
 				className="flex flex-row justify-evenly py-2 rounded-xl w-full bg-bgcolor-primary drop-shadow-bg items-center border-2 border-bgcolor-primary transition-all duration-200 hover:border-accent"
 				onClick={async () => {
 					await signInWithGoogle();
+					router.push("/");
 				}}
 			>
 				<Image src="/google.png" alt="Google Icon" width={40} height={40}></Image>

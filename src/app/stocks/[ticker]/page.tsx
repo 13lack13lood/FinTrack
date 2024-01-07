@@ -1,20 +1,48 @@
 "use client";
 
-import React from "react";
 import Chart from "@/src/components/stock/Chart";
 import ChartPeriodButtonArray from "@/src/components/stock/ChartPeriodButtonArray";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { HistoricalPriceDataProcessed, StockData } from "@/types/types";
 import TickerInfo from "@/src/components/stock/TickerInfo";
 import ExtraData from "@/src/components/stock/extraData/ExtraData";
 import { fetchHistoryData, fetchStockData } from "@/util/backendFetchData";
 import { processHistoryData, getPriceChange } from "@/util/ProcessStockData";
+import Loading from "./loading";
+import Image from "next/image";
+import star from "../../../../public/star.svg";
+import starFilled from "../../../../public/starFilled.svg";
+import { isStateChanged } from "@/util/firebase/auth";
+import { addToWatchlist, getWatchlist, removeFromWatchlist } from "@/util/firebase/firestore";
+import { useRouter } from "next/navigation";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 interface Props {
 	params: {
 		ticker: string;
 	};
 }
+
+const watchlistOnClick = (
+	isAddedToWatchlist: boolean,
+	setIsAddedToWatchlist: (isAddedToWatchlist: boolean) => void,
+	loggedIn: boolean,
+	ticker: string,
+	router: AppRouterInstance
+) => {
+	if (!loggedIn) {
+		router.push("/login");
+		return;
+	}
+
+	if (!isAddedToWatchlist) {
+		addToWatchlist(ticker);
+		setIsAddedToWatchlist(true);
+	} else {
+		removeFromWatchlist(ticker);
+		setIsAddedToWatchlist(false);
+	}
+};
 
 const page = ({ params }: Props) => {
 	const [stockData, setStockData] = useState<StockData>();
@@ -23,6 +51,37 @@ const page = ({ params }: Props) => {
 	const [history, setHistory] = useState<HistoricalPriceDataProcessed>();
 	const [historyLoaded, setHistoryLoaded] = useState(false);
 	const [currentPrice, setCurrentPrice] = useState(-1);
+	const [isAddedToWatchlist, setIsAddedToWatchlist] = useState(false);
+	const [loggedIn, setLoggedIn] = useState(false);
+
+	const router = useRouter();
+
+	useEffect(() => {
+		const fetchWatchlist = async () => {
+			const doc = await getWatchlist();
+
+			if (doc && doc.watchlist.includes(params.ticker)) {
+				setIsAddedToWatchlist(true);
+			} else {
+				setIsAddedToWatchlist(false);
+			}
+		};
+
+		fetchWatchlist();
+	}, []);
+
+	useEffect(() => {
+		const listener = isStateChanged((user) => {
+			if (user) {
+				setLoggedIn(true);
+			} else {
+				setLoggedIn(false);
+			}
+		});
+		return () => {
+			listener();
+		};
+	}, []);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -56,17 +115,42 @@ const page = ({ params }: Props) => {
 
 	return (
 		<>
-			{stockDataLoaded && stockData && (
+			{stockDataLoaded && stockData ? (
 				<div className="flex flex-col items-center px-4">
 					<div className="flex flex-row justify-center w-full p-6 mx-auto mt-10 space-x-7">
 						<div className="flex flex-col w-[55%] h-fit bg-bgcolor-primary space-y-6 py-6 rounded-xl drop-shadow-bg-light">
 							<div className="flex flex-row justify-between w-full">
-								<div className="flex flex-col items-start text-white bg-accent rounded-r-full pl-8 pr-10 py-2 space-y-1`">
-									<div className="text-xl">
-										{stockData.name} <span className="uppercase">({params.ticker})</span>
+								<div className="flex flex-row justify-center items-center bg-accent rounded-r-full pl-8 space-x-4 pr-7">
+									<div className="flex flex-col items-start text-white py-2 space-y-1`">
+										<div className="text-xl">
+											{stockData.name} <span className="uppercase">({params.ticker})</span>
+										</div>
+										<div className="text-sm uppercase">
+											{stockData.info.Exchange} · {stockData.info.Currency}
+										</div>
 									</div>
-									<div className="text-sm uppercase">
-										{stockData.info.Exchange} · {stockData.info.Currency}
+									<div className="flex flex-row items-center justify-center space-x-3">
+										<Image
+											src={isAddedToWatchlist ? starFilled : star}
+											alt="star"
+											width={30}
+											height={30}
+											onClick={() => {
+												watchlistOnClick(
+													isAddedToWatchlist,
+													setIsAddedToWatchlist,
+													loggedIn,
+													params.ticker,
+													router
+												);
+											}}
+										/>
+										{isAddedToWatchlist && (
+											<div className="flex flex-col items-center justify-center">
+												<div className="text-white text-sm">Added To</div>
+												<div className="text-white text-sm">Watchlist</div>
+											</div>
+										)}
 									</div>
 								</div>
 								<div className="flex flex-col items-end px-6">
@@ -121,6 +205,8 @@ const page = ({ params }: Props) => {
 						<ExtraData stockData={stockData} />
 					</div>
 				</div>
+			) : (
+				<Loading />
 			)}
 		</>
 	);

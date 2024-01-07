@@ -1,14 +1,14 @@
-import auth from "@/util/firebase/firebase";
+import { auth } from "@/util/firebase/firebase";
 import {
 	GoogleAuthProvider,
 	User,
 	onAuthStateChanged,
 	signInWithPopup,
 	createUserWithEmailAndPassword,
-	UserCredential,
 	updateProfile,
 	signInWithEmailAndPassword,
 } from "firebase/auth";
+import { createWatchlist } from "./firestore";
 
 const isStateChanged = (callback: (user: User | null) => void) => {
 	return onAuthStateChanged(auth, callback);
@@ -17,7 +17,9 @@ const isStateChanged = (callback: (user: User | null) => void) => {
 const signInWithGoogle = async () => {
 	const provider = new GoogleAuthProvider();
 
-	await signInWithPopup(auth, provider).catch((e) => console.error("Error signing in with Google", e));
+	await signInWithPopup(auth, provider)
+		.then((userCredientials) => createWatchlist(userCredientials.user.uid))
+		.catch((e) => console.error("Error signing in with Google", e));
 };
 
 const createAccount = async (email: string, password: string, name: string) => {
@@ -26,6 +28,7 @@ const createAccount = async (email: string, password: string, name: string) => {
 			updateProfile(userCredentials.user, {
 				displayName: name,
 			});
+			createWatchlist(userCredentials.user.uid);
 		})
 		.catch((e) => false);
 };
@@ -34,8 +37,8 @@ const loginAccount = async (email: string, password: string) => {
 	return await signInWithEmailAndPassword(auth, email, password).catch((e) => false);
 };
 
-const signOut = () => {
-	return auth.signOut().catch((e) => console.error("Error signing out with Google"));
+const signOut = async () => {
+	return await auth.signOut().catch((e) => console.error("Error signing out with Google"));
 };
 
 export { isStateChanged, signInWithGoogle, signOut, createAccount, loginAccount };

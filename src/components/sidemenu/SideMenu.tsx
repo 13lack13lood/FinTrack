@@ -1,5 +1,9 @@
 import React from "react";
 import SideMenuItem from "./SideMenuItem";
+import explore from "../../../public/explore.svg";
+import news from "../../../public/news.svg";
+import portfolio from "../../../public/portfolio.svg";
+import watchlist from "../../../public/watchlist.svg";
 
 interface Props {
 	toggle: boolean;
@@ -18,7 +22,7 @@ const SideMenu = ({ toggle, setToggle }: Props) => {
 					item={{
 						title: "Explore",
 						link: "/explore",
-						icon: "./explore.svg",
+						icon: explore,
 					}}
 					setToggle={setToggle}
 				></SideMenuItem>
@@ -26,7 +30,7 @@ const SideMenu = ({ toggle, setToggle }: Props) => {
 					item={{
 						title: "News",
 						link: "/news",
-						icon: "./news.svg",
+						icon: news,
 					}}
 					setToggle={setToggle}
 				></SideMenuItem>
@@ -34,7 +38,7 @@ const SideMenu = ({ toggle, setToggle }: Props) => {
 					item={{
 						title: "Portfolio",
 						link: "/portfolio",
-						icon: "./portfolio.svg",
+						icon: portfolio,
 					}}
 					setToggle={setToggle}
 				></SideMenuItem>
@@ -42,7 +46,7 @@ const SideMenu = ({ toggle, setToggle }: Props) => {
 					item={{
 						title: "Watchlist",
 						link: "/watchlist",
-						icon: "./watchlist.svg",
+						icon: watchlist,
 					}}
 					setToggle={setToggle}
 				></SideMenuItem>

@@ -4,7 +4,7 @@ import FillButton from "@/src/components/buttons/FillButton";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import React, { useState } from "react";
 import * as yup from "yup";
-import auth from "@/util/firebase/firebase";
+import { auth } from "@/util/firebase/firebase";
 import { updateEmail, updatePassword, updateProfile } from "firebase/auth";
 
 const validationSchemaName = yup.object({

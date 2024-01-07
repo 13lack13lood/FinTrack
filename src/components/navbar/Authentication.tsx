@@ -1,5 +1,4 @@
-import { isStateChanged, signOut, signInWithGoogle } from "@/util/firebase/auth";
-import auth from "@/util/firebase/firebase";
+import { isStateChanged, signOut } from "@/util/firebase/auth";
 import FillButton from "../buttons/FillButton";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -29,10 +28,10 @@ const Authentication = () => {
 					<FillButton text="My Account" onClick={() => router.push("/account")} />
 					<FillButton
 						text="Sign out"
-						onClick={() => {
-							signOut();
-							setSignedIn(false);
+						onClick={async () => {
 							router.push("/");
+							await signOut();
+							setSignedIn(false);
 						}}
 					/>
 				</>

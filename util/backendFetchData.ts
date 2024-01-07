@@ -4,6 +4,7 @@ import {
 	GeneralNewsDataRaw,
 	StockData,
 	HistoricalPriceDataRaw,
+	QuickStockData,
 } from "@/types/types";
 
 const backend = "http://localhost:5000/";
@@ -20,7 +21,7 @@ const fetchExploreData = async (stocks: ExploreSelection) => {
 };
 
 const fetchNewsData = async () => {
-	const res = await fetch(backend + "news/", {
+	const res = await fetch(backend + "news", {
 		cache: "no-store",
 	});
 
@@ -65,4 +66,14 @@ const fetchHistoryData = async (period: string, ticker: string) => {
 	return data;
 };
 
-export { fetchExploreData, fetchNewsData, fetchStockData, fetchIndexData, fetchHistoryData };
+const fetchQuickStockData = async (ticker: string) => {
+	const res = await fetch(backend + "quick_info/" + ticker, {
+		cache: "no-store",
+	});
+
+	const data: QuickStockData = await res.json();
+
+	return data;
+};
+
+export { fetchExploreData, fetchNewsData, fetchStockData, fetchIndexData, fetchHistoryData, fetchQuickStockData };
