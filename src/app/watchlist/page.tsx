@@ -9,10 +9,12 @@ import close from "../../../public/close.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { auth } from "@/util/firebase/firebase";
+import { isStateChanged } from "@/util/firebase/auth";
 
 const Page = async () => {
     const [docData, setDocData] = useState<DocumentData>();
     const [update, setUpdate] = useState(false);
+    const [signedIn, setSignedIn] = useState(false);
 
     const router = useRouter();
 
@@ -26,12 +28,25 @@ const Page = async () => {
         getData();
     }, [update]);
 
-    const user = auth.currentUser;
+    useEffect(() => {
+        const listener = isStateChanged((user) => {
+            if (user) {
+                setSignedIn(true);
+            } else {
+                setSignedIn(false);
+            }
+        });
 
-    if (!user) {
-        router.push("/login");
-        return <div></div>;
-    }
+        return () => {
+            listener();
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!signedIn) {
+            router.push("/login");
+        }
+    });
 
     return (
         <div className="flex flex-col items-center justify-center w-max mx-auto p-4 space-y-7">

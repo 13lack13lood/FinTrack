@@ -2,11 +2,12 @@
 
 import FillButton from "@/src/components/buttons/FillButton";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import { auth } from "@/util/firebase/firebase";
-import { updateEmail, updatePassword, updateProfile } from "firebase/auth";
+import { User, updateEmail, updatePassword, updateProfile } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { isStateChanged } from "@/util/firebase/auth";
 
 const validationSchemaName = yup.object({
     name: yup.string().required("Name is required"),
@@ -21,17 +22,35 @@ const validationSchemaPassword = yup.object({
 const Page = () => {
     const [fail, setFail] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [signedIn, setSignedIn] = useState(false);
+    const [user, setUser] = useState<User | null>();
 
     const router = useRouter();
 
-    const user = auth.currentUser;
+    useEffect(() => {
+        const listener = isStateChanged((user) => {
+            if (user) {
+                setSignedIn(true);
+            } else {
+                setSignedIn(false);
+            }
+        });
 
-    if (!user) {
-        router.push("/login");
-        return <div></div>;
-    }
+        return () => {
+            listener();
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!signedIn) {
+            router.push("/login");
+        } else {
+            setUser(auth.currentUser);
+        }
+    });
 
     return (
+        signedIn &&
         user && (
             <div className="flex flex-col items-center justify-center mt-10 mx-auto space-y-10 w-[350px]">
                 <div className="text-5xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-accent-blue to-accent p-4">My Account</div>

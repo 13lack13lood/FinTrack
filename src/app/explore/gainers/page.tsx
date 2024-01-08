@@ -1,3 +1,5 @@
+"use client";
+
 import StockList from "@/src/components/explore/StockList";
 import { fetchExploreData } from "@/util/backendFetchData";
 
