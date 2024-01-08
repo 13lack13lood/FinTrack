@@ -38,7 +38,7 @@ const watchlistOnClick = (isAddedToWatchlist: boolean, setIsAddedToWatchlist: (i
     }
 };
 
-const page = ({ params }: Props) => {
+const Page = ({ params }: Props) => {
     const [stockData, setStockData] = useState<StockData>();
     const [stockDataLoaded, setStockDataLoaded] = useState(false);
     const [period, setPeriod] = useState("1d");
@@ -202,4 +202,4 @@ const page = ({ params }: Props) => {
     );
 };
 
-export default page;
+export default Page;

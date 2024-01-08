@@ -23,7 +23,7 @@ const processNewsData = (news: GeneralNewsDataRaw) => {
     return data;
 };
 
-const page = async () => {
+const Page = async () => {
     const data = await fetchNewsData();
     const processedData = processNewsData(data);
 
@@ -59,4 +59,4 @@ const page = async () => {
     );
 };
 
-export default page;
+export default Page;
