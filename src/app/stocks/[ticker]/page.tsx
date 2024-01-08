@@ -63,7 +63,7 @@ const Page = ({ params }: Props) => {
         };
 
         fetchWatchlist();
-    }, []);
+    }, [params.ticker]);
 
     useEffect(() => {
         const listener = isStateChanged((user) => {
@@ -76,7 +76,7 @@ const Page = ({ params }: Props) => {
         return () => {
             listener();
         };
-    }, []);
+    }, [params.ticker]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -94,7 +94,7 @@ const Page = ({ params }: Props) => {
         };
 
         fetchData();
-    }, []);
+    }, [params.ticker]);
 
     useEffect(() => {
         if (stockDataLoaded && history) {
@@ -111,7 +111,7 @@ const Page = ({ params }: Props) => {
             setHistoryLoaded(true);
         };
         fetchData();
-    }, [period, setPeriod]);
+    }, [period]);
 
     if (!stockFound) {
         return <div className="flex flex-col justify-center items-center h-[40vw] text-white text-4xl font-medium tracking-wider text-center">Stock Not Found</div>;

@@ -32,7 +32,7 @@ const IndexPage = () => {
         };
 
         fetchData();
-    }, [currentIndex, setCurrentIndex]);
+    }, [currentIndex]);
 
     useEffect(() => {
         if (indexData && history) {
@@ -49,7 +49,7 @@ const IndexPage = () => {
             setHistoryLoaded(true);
         };
         fetchData();
-    }, [period, setPeriod]);
+    }, [period]);
 
     return (
         <div className="flex flex-col justify-center p-6 space-y-7">

@@ -28,7 +28,7 @@ const TickerInfo = ({ stock_info }: Props) => {
                     <div className="text-lg xl:text-xl font-light uppercase">${stock_info["EPS (ttm)"]}</div>
                 </div>
                 <div className="flex flex-row justify-between items-center col-span-2 text-white bg-bgcolor-primary w-full p-4 rounded-xl drop-shadow-bg">
-                    <div className="text-base font-medium">Day's Range</div>
+                    <div className="text-base font-medium">Day&#39;s Range</div>
                     <div className="text-lg xl:text-xl font-light uppercase">${stock_info["Day's Range"]}</div>
                 </div>
                 <div className="flex flex-row justify-between items-center col-span-2 text-white bg-bgcolor-primary w-full p-4 rounded-xl drop-shadow-bg">

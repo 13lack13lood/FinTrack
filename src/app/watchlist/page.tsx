@@ -50,7 +50,7 @@ const Page = async () => {
                         const stockData = await fetchQuickStockData(ticker);
 
                         return (
-                            <div className="grid grid-cols-8 items-center w-full">
+                            <div key={"watchlist_" + ticker} className="grid grid-cols-8 items-center w-full">
                                 <div className="flex flex-row items-center justify-center w-full ">
                                     <Image
                                         src={close}

@@ -8,24 +8,24 @@ import { useRouter } from "next/navigation";
 const buttons: ExploreSelection[] = ["market index", "trending", "gainers", "losers"];
 
 const ExploreButtonArray = () => {
-	const [selectedPage, setSelectedPage] = useState<ExploreSelection>("market index");
-	const router = useRouter();
+    const [selectedPage, setSelectedPage] = useState<ExploreSelection>("market index");
+    const router = useRouter();
 
-	useEffect(() => {
-		if (selectedPage == "market index") {
-			router.push("/explore");
-		} else {
-			router.push("/explore/" + selectedPage);
-		}
-	}, [selectedPage]);
+    useEffect(() => {
+        if (selectedPage == "market index") {
+            router.push("/explore");
+        } else {
+            router.push("/explore/" + selectedPage);
+        }
+    }, [selectedPage]);
 
-	return (
-		<div className="flex flex-wrap items-center mx-auto w-[90%] justify-center py-7 border-b-2 border-accent space-x-16">
-			{buttons.map((text) => {
-				return <ExploreButton selected={selectedPage} setSelected={setSelectedPage} text={text} />;
-			})}
-		</div>
-	);
+    return (
+        <div className="flex flex-wrap items-center mx-auto w-[90%] justify-center py-7 border-b-2 border-accent space-x-16">
+            {buttons.map((text) => {
+                return <ExploreButton key={"explore_button_" + text} selected={selectedPage} setSelected={setSelectedPage} text={text} />;
+            })}
+        </div>
+    );
 };
 
 export default ExploreButtonArray;

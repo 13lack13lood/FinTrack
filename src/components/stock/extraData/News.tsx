@@ -34,7 +34,7 @@ const News = ({ news }: Props) => {
             {/* <div className="grid grid-cols-2 gap-4 col-span-2"> */}
             {processedData.map((value) => {
                 return (
-                    <div className="flex flex-row w-full rounded-2xl p-4 bg-bgcolor-primary drop-shadow-bg space-x-5">
+                    <div key={value.headline} className="flex flex-row w-full rounded-2xl p-4 bg-bgcolor-primary drop-shadow-bg space-x-5">
                         <img src={value.img_src} width={200} height={200}></img>
                         <div className="flex flex-col justify-center text-white space-y-3">
                             <div className="flex flex-wrap space-x-5">
@@ -51,7 +51,11 @@ const News = ({ news }: Props) => {
                                     <div className="font-light tracking-wider">None</div>
                                 ) : (
                                     value.tickers.map((ticker) => {
-                                        return <div className="font-light tracking-wider">{ticker}</div>;
+                                        return (
+                                            <div key={"stock_news_" + ticker} className="font-light tracking-wider">
+                                                {ticker}
+                                            </div>
+                                        );
                                     })
                                 )}
                             </div>
