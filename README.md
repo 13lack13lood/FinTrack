@@ -2,7 +2,7 @@
 
 FinTrack is a full-stack equity analysis web application providing comprehensive analytics into market activity. A financial REST API with Flask was developed to deliver in-depth equity analytics including historical price data, key financial metrics, and current news analyzed with FinBERT, a pre-trained natural language processing model to analyze sentiment of financial text developed by ProsusAI. Additionally, Google's Firebase backend service was implemented for authentication and Cloud Firestore for its cloud database allowing personalized watchlist making.
 
-(Link to backend)[https://github.com/13lack13lood/FinTrack-Backend]
+[Link to backend](https://github.com/13lack13lood/FinTrack-Backend)
 
 ### Technologies Used
 - NextJS
