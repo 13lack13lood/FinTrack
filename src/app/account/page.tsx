@@ -31,23 +31,18 @@ const Page = () => {
         const listener = isStateChanged((user) => {
             if (user) {
                 setSignedIn(true);
+                console.log("signed in");
             } else {
                 setSignedIn(false);
+                router.push("/login");
             }
+            setUser(auth.currentUser);
         });
 
         return () => {
             listener();
         };
     }, []);
-
-    useEffect(() => {
-        if (!signedIn) {
-            router.push("/login");
-        } else {
-            setUser(auth.currentUser);
-        }
-    });
 
     return (
         signedIn &&
