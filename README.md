@@ -13,6 +13,7 @@ FinTrack is a full-stack equity analysis web application providing comprehensive
 - yfinance
 - Pandas
 - Web scraping with BeautifulSoup
+- Vercel
 
 ### Current Features
 - Explore trending stocks (most active, gainers, losers)
