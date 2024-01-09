@@ -23,12 +23,14 @@ const MoreInfo = ({ info, wiki, name }: Props) => {
             {wiki.text && (
                 <div className="flex flex-col w-1/3 bg-bgcolor-primary p-4 rounded-2xl drop-shadow-bg">
                     <div className="text-xl text-center text-white border-b-2 border-accent p-4 mb-5">{`About ${name}`}</div>
-                    <div className="text-white font-light">
-                        {wiki.text}
-                        <a href={wiki.url} className="underline transition-all duration-150 hover:text-accent" target="_blank">
-                            [Read More]
-                        </a>
-                    </div>
+                    {wiki && (
+                        <div className="text-white font-light">
+                            {wiki.text}
+                            <a href={wiki.url} className="underline transition-all duration-150 hover:text-accent" target="_blank">
+                                [Read More]
+                            </a>
+                        </div>
+                    )}
                 </div>
             )}
         </div>
