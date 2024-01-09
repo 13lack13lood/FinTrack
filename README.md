@@ -21,7 +21,7 @@ FinTrack is a full-stack equity analysis web application providing comprehensive
 - Provides in-depth analytics for each stock
   - Historical price data
   - Key financial metrics
-  - Current news analyzed with FinBERT by ProsusAI
+  - Current news analyzed with FinBERT by ProsusAI (sentiment analysis not deployed on backend since its too computationally expensive)
   - Balance sheets (yearly and quarterly)
   - Income sheets (yearly and quarterly)
   - Cashflow sheets (yearly and quarterly)
