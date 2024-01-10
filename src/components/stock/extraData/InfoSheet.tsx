@@ -26,6 +26,10 @@ const processInfoData = (info: Props["info"], quarter: Props["quarter"]) => {
 };
 
 const InfoSheet = ({ info, quarter }: Props) => {
+    if (!info || !quarter) {
+        return <div className="text-4xl text-center w-full mt-16">Information unavailable right now</div>;
+    }
+
     const data = processInfoData(info, quarter);
     const [selected, setSelected] = useState(0);
 

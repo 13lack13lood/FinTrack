@@ -27,6 +27,10 @@ const processNewsData = (news: GeneralNewsDataRaw) => {
 };
 
 const News = ({ news }: Props) => {
+    if (!news) {
+        return <div className="text-4xl text-center w-full mt-16">Information unavailable right now</div>;
+    }
+
     const processedData = processNewsData(news);
 
     return (
@@ -63,8 +67,8 @@ const News = ({ news }: Props) => {
                     </div>
                 );
             })}
-            {/* </div> */}
-            {/* <div className="flex flex-col w-full items-center space-y-5 bg-bgcolor-primary rounded-2xl drop-shadow-bg h-fit p-4">
+            {/* </div> 
+                <div className="flex flex-col w-full items-center space-y-5 bg-bgcolor-primary rounded-2xl drop-shadow-bg h-fit p-4">
                 <div className=" text-xl border-b-2 border-accent text-white px-4 py-1 text-center drop-shadow-bg-light font-light">Overall News Analysis</div>
                 <div className="flex flex-col w-full items-center space-y-4">
                     {Object.entries(news_mean.compound)

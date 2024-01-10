@@ -81,11 +81,11 @@ const Page = ({ params }: Props) => {
     useEffect(() => {
         const fetchData = async () => {
             const data: StockData = await fetchStockData(params.ticker);
-            console.log(data);
-            // if (!data.history || !data.stock_info) {
-            // 	setStockFound(false);
-            // 	return;
-            // }
+
+            if (!data.history || !data.stock_info) {
+                setStockFound(false);
+                return;
+            }
 
             setStockData(data);
             setHistory(processHistoryData(data.history.Open));
