@@ -28,7 +28,7 @@ const processNewsData = (news: GeneralNewsDataRaw) => {
 
 const News = ({ news }: Props) => {
     if (!news) {
-        return <div className="text-4xl text-center w-full mt-16">Information unavailable right now</div>;
+        return <div className="text-4xl text-white text-center w-full my-16">Information unavailable right now</div>;
     }
 
     const processedData = processNewsData(news);
